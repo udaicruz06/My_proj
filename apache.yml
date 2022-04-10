@@ -16,3 +16,13 @@
   handlers:
     - name: restart apache
       service: name=httpd state=restarted
+      firewalld:
+        zone: public
+        port: 80/tcp
+        permanent: true
+        state: enabled
+        become: yes
+    - name: Restart service firewalld
+      service:
+      name: firewalld
+      state: restarted
